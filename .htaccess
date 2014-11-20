@@ -1,0 +1,17 @@
+AddHandler x-httpd-php5 .php
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^mailtides\.com [NC]
+RewriteRule (.*) http://www.mailtides.com/$1 [L,R=301]
+RewriteCond %{REQUEST_URI} ^(.*)//(.*)$
+RewriteRule . %1/%2 [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/{2,} [NC]
+RewriteRule ^(.*) $1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . page.php [L]
+</IfModule>
+# END WordPress
